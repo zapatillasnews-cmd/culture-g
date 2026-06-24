@@ -151,6 +151,54 @@ const QUESTIONS = [
     img: "assets/art/dejeuner-canotiers.jpg",
     exp: "1881. Scène de convivialité sur la terrasse du restaurant Fournaise à Chatou, représentant les amis de Renoir dont sa future femme Aline Charigot. L'une des grandes œuvres de l'impressionnisme tardif. The Phillips Collection, Washington." },
 
+  { id: 92, cat: 'art', title: "Le Bal du moulin de la Galette", artist: "Pierre-Auguste Renoir", year: "1876", diff: 2,
+    img: "assets/art/moulin-galette.jpg",
+    exp: "1876. Scène de fête populaire à Montmartre, où bourgeois et ouvriers dansent ensemble sous les lampions. Chef-d'œuvre de l'impressionnisme : la lumière filtrée par les feuillages crée des taches dorées sur les visages. Musée d'Orsay, Paris." },
+
+  { id: 93, cat: 'art', title: "Un dimanche après-midi à la Grande Jatte", artist: "Georges Seurat", year: "1886", diff: 2,
+    img: "assets/art/grande-jatte.jpg",
+    exp: "1886. Œuvre fondatrice du pointillisme : Seurat y applique sa théorie de la division des couleurs en points purs juxtaposés. Il a mis deux ans à peindre ces 48 personnages au bord de la Seine. Art Institute of Chicago." },
+
+  { id: 94, cat: 'art', title: "La Grande Odalisque", artist: "Jean-Auguste-Dominique Ingres", year: "1814", diff: 3,
+    img: "assets/art/odalisque.jpg",
+    exp: "1814. Femme orientale allongée aux proportions anatomiquement impossible (deux vertèbres supplémentaires). La toile scandalisa les critiques au Salon de 1819 par son mélange de sensualité et de froideur néoclassique. Musée du Louvre, Paris." },
+
+  { id: 95, cat: 'art', title: "La Laitière", artist: "Johannes Vermeer", year: "1658", diff: 2,
+    img: "assets/art/laitiere-vermeer.jpg",
+    exp: "Vers 1658. Servante versant du lait avec une concentration absolue — la lumière naturelle de gauche transforme ce geste banal en moment d'éternité. Tableau si célèbre aux Pays-Bas qu'on l'appelle familièrement « notre Joconde ». Rijksmuseum, Amsterdam." },
+
+  { id: 96, cat: 'art', title: "La Création d'Adam", artist: "Michel-Ange", year: "1512", diff: 1,
+    img: "assets/art/creation-adam.jpg",
+    exp: "1512. Fragment central de la voûte de la Chapelle Sixtine. Dieu et Adam se tendent les mains sans se toucher — l'étincelle de vie dans cet espace vide est l'une des images les plus reproduites de l'humanité. Chapelle Sixtine, Vatican." },
+
+  { id: 97, cat: 'art', title: "Las Meninas", artist: "Diego Velázquez", year: "1656", diff: 2,
+    img: "assets/art/las-meninas.jpg",
+    exp: "1656. Œuvre énigmatique où Velázquez se représente en train de peindre la famille royale — mais qui regardons-nous ? Un jeu de miroirs et de perspectives qui a fasciné Picasso, qui en a réalisé 58 variations. Musée du Prado, Madrid." },
+
+  { id: 98, cat: 'art', title: "Nighthawks", artist: "Edward Hopper", year: "1942", diff: 2,
+    img: "assets/art/nighthawks-hopper.jpg",
+    exp: "1942. Quatre silhouettes isolées dans un diner américain au milieu de la nuit urbaine. L'absence de porte visible, la lumière crue et la solitude des personnages en font l'œuvre la plus représentative de l'isolement moderne. Art Institute of Chicago." },
+
+  { id: 99, cat: 'art', title: "Le Déjeuner sur l'herbe", artist: "Édouard Manet", year: "1863", diff: 2,
+    img: "assets/art/dejeuner-herbe.jpg",
+    exp: "1863. Scandale au Salon des Refusés : une femme nue pique-nique tranquillement avec des hommes habillés. Napoléon III lui-même la qualifia de tableau indécent. Pourtant, c'est une réinterprétation d'une gravure de Raphaël. Musée d'Orsay, Paris." },
+
+  { id: 100, cat: 'art', title: "Le Trois Mai 1808", artist: "Francisco de Goya", year: "1814", diff: 3,
+    img: "assets/art/tres-mayo-goya.jpg",
+    exp: "1814. Goya peint les exécutions de civils espagnols par les troupes napoléoniennes. L'homme en blanc aux bras levés devient un symbole universel du sacrifice. Tableau fondateur de la peinture de guerre moderne. Musée du Prado, Madrid." },
+
+  { id: 101, cat: 'art', title: "La Chambre à Arles", artist: "Vincent van Gogh", year: "1888", diff: 2,
+    img: "assets/art/chambre-arles.jpg",
+    exp: "1888. Van Gogh a peint sa propre chambre à Arles — les couleurs vives et la perspective déformée reflètent son état d'esprit agité. Il en a réalisé trois versions. La simplicité voulue comme symbole du repos. Art Institute of Chicago." },
+
+  { id: 102, cat: 'art', title: "Le Serment des Horaces", artist: "Jacques-Louis David", year: "1784", diff: 3,
+    img: "assets/art/serment-horaces.jpg",
+    exp: "1784. Trois frères romains prêtent serment de vaincre ou mourir pour Rome. David y incarne l'idéal néoclassique et les vertus républicaines — la toile fut perçue comme un appel révolutionnaire 5 ans avant 1789. Musée du Louvre, Paris." },
+
+  { id: 103, cat: 'art', title: "La Balançoire", artist: "Jean-Honoré Fragonard", year: "1767", diff: 3,
+    img: "assets/art/balancoire-fragonard.jpg",
+    exp: "1767. Commandée par un baron libertin qui voulait se voir couché dans les buissons regardant sous la jupe d'une jeune femme. Fragonard transforme cette scène galante en chef-d'œuvre de légèreté rococo, toute en roses et dentelles. Wallace Collection, Londres." },
+
   // ── CINÉMA ─────────────────────────────────────────────────────────────────
   { id: 53, cat: 'cinema', q: "Quel film de Steven Spielberg est le plus rentable de sa carrière ?", a: "E.T. l'extra-terrestre (1982)", exp: "E.T. a tenu le record du film le plus rentable de l'histoire pendant 11 ans, avant d'être détrôné par Jurassic Park, puis Titanic.", diff: 2 },
   { id: 54, cat: 'cinema', q: "Qui a réalisé la trilogie 'Le Seigneur des Anneaux' ?", a: "Peter Jackson (2001–2003)", exp: "Le Retour du Roi remporte 11 Oscars dont Meilleur Film, égalant Ben-Hur et Titanic. La trilogie est tournée intégralement en Nouvelle-Zélande.", diff: 1 },
