@@ -1636,9 +1636,15 @@ body {
   overflow-y: auto;
   background: linear-gradient(to bottom, #1C1407 0%, #0E0A04 100%);
   padding: 18px 38px 18px 44px;
-  display: flex;
-  flex-direction: column;
+  display: block;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  transition: max-height 0.5s ease;
+}
+
+/* Plus de place pour lire le récit une fois révélé (le panneau défile si besoin) */
+.hist-card.revealed .hist-panel {
+  max-height: 66%;
 }
 
 /* Mot vertical (époque) en filigrane à gauche */
@@ -1743,7 +1749,7 @@ body {
 }
 
 .hist-card.revealed .hist-desc-wrap {
-  max-height: 360px;
+  max-height: 1400px;   /* assez grand pour ne jamais couper le texte ; le panneau gère le scroll */
   opacity: 1;
   margin-top: 16px;
 }

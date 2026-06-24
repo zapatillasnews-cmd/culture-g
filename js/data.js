@@ -101,6 +101,56 @@ const QUESTIONS = [
     markTop: "2001", markBot: "", img: "assets/histoire/11-septembre.jpg",
     exp: "Le 11 septembre 2001, des terroristes d'Al-Qaïda détournent quatre avions et frappent les tours jumelles du World Trade Center et le Pentagone, faisant près de 3 000 morts. Ces attentats bouleversent la géopolitique mondiale et déclenchent la « guerre contre le terrorisme »." },
 
+  { id: 112, cat: 'histoire', mode: 'event', diff: 2,
+    event: "La fin de Pompéi", era: "ANTIQUITÉ", place: "Pompéi, Italie", type: "Catastrophe",
+    markTop: "79", markBot: "", img: "assets/histoire/pompei.jpg",
+    exp: "En l'an 79, l'éruption du Vésuve ensevelit en quelques heures les villes romaines de Pompéi et d'Herculanum sous des mètres de cendres. Figées dans le temps, elles offrent aujourd'hui un témoignage unique de la vie quotidienne dans l'Antiquité romaine." },
+
+  { id: 113, cat: 'histoire', mode: 'event', diff: 2,
+    event: "Jeanne d'Arc", era: "MOYEN ÂGE", place: "France", type: "Guerre de Cent Ans",
+    markTop: "1429", markBot: "1431", img: "assets/histoire/jeanne-darc.jpg",
+    exp: "En 1429, une paysanne de 17 ans, Jeanne d'Arc, conduit l'armée française à la victoire d'Orléans et fait sacrer Charles VII à Reims. Capturée puis brûlée vive à Rouen en 1431, elle devient une héroïne nationale et sera canonisée sainte en 1920." },
+
+  { id: 114, cat: 'histoire', mode: 'event', diff: 3,
+    event: "La chute de Constantinople", era: "MOYEN ÂGE", place: "Constantinople", type: "Conquête",
+    markTop: "1453", markBot: "", img: "assets/histoire/constantinople.jpg",
+    exp: "Le 29 mai 1453, le sultan ottoman Mehmed II s'empare de Constantinople, capitale de l'Empire byzantin, après un long siège. Cet événement marque la fin de l'Empire romain d'Orient et, pour beaucoup d'historiens, la fin du Moyen Âge." },
+
+  { id: 115, cat: 'histoire', mode: 'event', diff: 2,
+    event: "La Réforme protestante", era: "RENAISSANCE", place: "Wittenberg, S.-Empire", type: "Religion",
+    markTop: "1517", markBot: "", img: "assets/histoire/reforme-luther.jpg",
+    exp: "En 1517, le moine allemand Martin Luther placarde ses 95 thèses dénonçant les abus de l'Église catholique. Sa contestation déclenche la Réforme protestante, qui divise durablement la chrétienté occidentale et transforme l'Europe." },
+
+  { id: 116, cat: 'histoire', mode: 'event', diff: 2,
+    event: "La Révolution industrielle", era: "XIXᵉ SIÈCLE", place: "Royaume-Uni", type: "Économie",
+    markTop: "1769", markBot: "1840", img: "assets/histoire/revolution-industrielle.jpg",
+    exp: "À partir de la fin du XVIIIᵉ siècle, la machine à vapeur et la mécanisation transforment le Royaume-Uni puis le monde entier. La Révolution industrielle fait naître les usines, les villes ouvrières et le chemin de fer, bouleversant radicalement les sociétés humaines." },
+
+  { id: 117, cat: 'histoire', mode: 'event', diff: 1,
+    event: "Le naufrage du Titanic", era: "XXᵉ SIÈCLE", place: "Atlantique Nord", type: "Catastrophe",
+    markTop: "1912", markBot: "", img: "assets/histoire/titanic.jpg",
+    exp: "Dans la nuit du 14 au 15 avril 1912, le paquebot Titanic, réputé insubmersible, heurte un iceberg lors de son voyage inaugural et sombre en moins de trois heures. Le naufrage fait plus de 1 500 morts et reste le plus célèbre de l'histoire maritime." },
+
+  { id: 118, cat: 'histoire', mode: 'event', diff: 2,
+    event: "L'indépendance de l'Inde", era: "XXᵉ SIÈCLE", place: "Inde", type: "Indépendance",
+    markTop: "1947", markBot: "", img: "assets/histoire/gandhi.jpg",
+    exp: "En 1947, l'Inde obtient son indépendance du Royaume-Uni, fruit de décennies de lutte non-violente menée par Mahatma Gandhi. Sa désobéissance civile pacifique inspirera les mouvements pour les droits civiques dans le monde entier." },
+
+  { id: 119, cat: 'histoire', mode: 'event', diff: 1,
+    event: "Gagarine dans l'espace", era: "ESPACE", place: "Orbite terrestre", type: "Exploit spatial",
+    markTop: "1961", markBot: "", img: "assets/histoire/gagarine.jpg",
+    exp: "Le 12 avril 1961, le cosmonaute soviétique Iouri Gagarine devient le premier être humain à voyager dans l'espace, effectuant une orbite complète de la Terre en 108 minutes. Son vol marque un sommet de la course à l'espace entre l'URSS et les États-Unis." },
+
+  { id: 120, cat: 'histoire', mode: 'event', diff: 1,
+    event: "« I have a dream »", era: "XXᵉ SIÈCLE", place: "Washington, É.-U.", type: "Droits civiques",
+    markTop: "1963", markBot: "", img: "assets/histoire/mlk.jpg",
+    exp: "Le 28 août 1963, devant 250 000 personnes à Washington, le pasteur Martin Luther King prononce son discours « I have a dream », appelant à l'égalité entre Blancs et Noirs. Il devient le symbole de la lutte non-violente pour les droits civiques aux États-Unis." },
+
+  { id: 121, cat: 'histoire', mode: 'event', diff: 1,
+    event: "Mandela et la fin de l'apartheid", era: "XXᵉ SIÈCLE", place: "Afrique du Sud", type: "Droits humains",
+    markTop: "1990", markBot: "1994", img: "assets/histoire/mandela.jpg",
+    exp: "Libéré en 1990 après 27 ans de prison, Nelson Mandela met fin au régime raciste de l'apartheid et devient en 1994 le premier président noir d'Afrique du Sud, élu démocratiquement. Son combat pour la réconciliation lui vaut le prix Nobel de la paix." },
+
   // ── GÉOGRAPHIE ─────────────────────────────────────────────────────────────
   { id: 17, cat: 'geo', q: "Quel est le plus long fleuve du monde ?", a: "Le Nil (6 650 km)", exp: "Selon la majorité des sources, le Nil est le plus long. Certaines études récentes mettent l'Amazone en tête selon le point de source retenu.", diff: 2 },
   { id: 18, cat: 'geo', q: "Quelle est la capitale du Canada ?", a: "Ottawa", exp: "Ottawa est la capitale fédérale depuis 1857, choisie par la reine Victoria comme compromis entre Toronto (anglophone) et Montréal (francophone).", diff: 2 },
