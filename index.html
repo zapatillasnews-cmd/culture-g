@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <title>Culture G</title>
+  <meta name="description" content="Entraîne ta culture générale avec des cartes à swiper">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Culture G">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- ── AUTH ──────────────────────────────────────────────────────────── -->
+  <div id="screen-auth" class="screen active">
+    <div class="auth-container">
+      <div class="auth-logo">
+        <div class="logo-text">Culture <em>G</em></div>
+        <p class="logo-sub">Entraîne ta culture générale</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Connexion</button>
+        <button class="auth-tab" data-tab="register">Inscription</button>
+      </div>
+
+      <form id="auth-form" class="auth-form" novalidate>
+        <div class="input-group">
+          <label for="auth-email">E-mail</label>
+          <input type="email" id="auth-email" placeholder="ton@email.com" autocomplete="email">
+        </div>
+        <div class="input-group">
+          <label for="auth-password">Mot de passe</label>
+          <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <div id="auth-error" class="auth-error" role="alert"></div>
+        <button type="submit" id="auth-submit" class="btn-primary">Se connecter</button>
+      </form>
+
+      <button id="btn-skip-auth" class="btn-ghost">Continuer sans compte →</button>
+    </div>
+  </div>
+
+  <!-- ── HOME ──────────────────────────────────────────────────────────── -->
+  <div id="screen-home" class="screen">
+    <header class="home-header">
+      <span class="logo-small">Culture <em>G</em></span>
+      <div class="header-right">
+        <div id="user-stats" class="user-stats">
+          <span id="total-score">0</span> pts
+        </div>
+        <button id="btn-logout" class="btn-icon" title="Déconnexion" aria-label="Déconnexion">⎋</button>
+      </div>
+    </header>
+
+    <div class="home-content">
+      <h1 class="home-title">Choisis une<br>catégorie</h1>
+      <div class="categories-grid" id="categories-grid"></div>
+    </div>
+
+    <footer class="home-footer">
+      <div id="daily-progress" class="daily-progress">
+        <div class="progress-text">Aujourd'hui : <span id="daily-count">0</span> cartes vues</div>
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ── CARDS ──────────────────────────────────────────────────────────── -->
+  <div id="screen-cards" class="screen">
+    <header class="cards-header">
+      <button id="btn-back" class="btn-icon-white" aria-label="Retour">←</button>
+      <div class="cards-progress">
+        <span id="card-current">1</span> / <span id="card-total">8</span>
+      </div>
+      <div id="session-score" class="session-score">0 ✓</div>
+    </header>
+
+    <div class="cards-arena">
+      <div class="swipe-hint" id="hint-left">✗ Pas su</div>
+      <div class="swipe-hint" id="hint-right">✓ Je savais</div>
+      <div id="card-stack" class="card-stack"></div>
+    </div>
+
+    <div class="tap-hint" id="tap-hint">Appuie pour révéler la réponse</div>
+
+    <div class="card-actions" id="card-actions">
+      <button class="btn-action btn-wrong" id="btn-wrong">
+        <span class="action-icon">✗</span>
+        <span>Je ne savais pas</span>
+      </button>
+      <button class="btn-action btn-correct" id="btn-correct">
+        <span class="action-icon">✓</span>
+        <span>Je savais !</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── RESULTS ────────────────────────────────────────────────────────── -->
+  <div id="screen-results" class="screen">
+    <div class="results-container">
+      <div class="results-header">
+        <div id="results-emoji" class="results-emoji">🎉</div>
+        <h1 class="results-title">Résultat</h1>
+        <div id="results-category" class="results-category"></div>
+      </div>
+
+      <div class="results-score-card">
+        <div class="score-big">
+          <span id="results-correct">0</span>
+          <span class="score-sep">/</span>
+          <span id="results-total">0</span>
+        </div>
+        <div id="results-percentage" class="results-percentage">0 %</div>
+        <div id="results-message" class="results-message"></div>
+      </div>
+
+      <div class="results-actions">
+        <button class="btn-primary" id="btn-replay">Rejouer cette catégorie</button>
+        <button class="btn-ghost" id="btn-home">Changer de catégorie</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/data.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
