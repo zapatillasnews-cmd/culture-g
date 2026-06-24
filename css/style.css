@@ -1031,7 +1031,7 @@ body {
   left: -8px;
   width: 14px;
   height: 14px;
-  background: #E8D5B0;
+  background: transparent;
   border-radius: 50%;
 }
 .art-stub-notch-top { top: -7px; }
