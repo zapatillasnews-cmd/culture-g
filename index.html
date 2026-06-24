@@ -239,6 +239,83 @@
     </div>
   </div>
 
+  <!-- ── LAB (SCIENCE) ─────────────────────────────────────────────────────── -->
+  <div id="screen-lab" class="screen">
+    <header class="lab-header">
+      <button id="btn-back-lab" class="btn-icon-white" aria-label="Retour">←</button>
+      <div class="lab-progress">
+        <span id="lab-current">1</span> / <span id="lab-total">8</span>
+      </div>
+      <div id="lab-score" class="session-score">0 ✓</div>
+    </header>
+
+    <div class="lab-arena">
+      <div class="lab-question-wrap">
+        <p class="lab-label">QUESTION</p>
+        <h2 class="lab-question" id="lab-question"></h2>
+      </div>
+
+      <div class="lab-beaker-stage" id="lab-beaker-stage">
+        <svg class="lab-beaker" id="lab-beaker" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="liquid-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="var(--lab-color, #4FC3E8)"/>
+              <stop offset="100%" stop-color="var(--lab-deep, #2E7BC4)"/>
+            </linearGradient>
+            <clipPath id="beaker-clip">
+              <path d="M60,54 L60,206 Q60,218 72,218 L128,218 Q140,218 140,206 L140,54 Z"/>
+            </clipPath>
+          </defs>
+
+          <!-- Liquide (clippé à l'intérieur) -->
+          <g clip-path="url(#beaker-clip)">
+            <g class="beaker-liquid-group">
+              <rect class="beaker-liquid" x="58" y="54" width="84" height="172" fill="url(#liquid-grad)"/>
+              <ellipse class="beaker-surface" cx="100" cy="54" rx="42" ry="4"/>
+              <circle class="bubble b1" cx="80"  cy="205" r="4"/>
+              <circle class="bubble b2" cx="100" cy="210" r="5.5"/>
+              <circle class="bubble b3" cx="118" cy="203" r="3.5"/>
+              <circle class="bubble b4" cx="92"  cy="208" r="3"/>
+              <circle class="bubble b5" cx="110" cy="206" r="4.5"/>
+            </g>
+          </g>
+
+          <!-- Graduations -->
+          <line class="beaker-tick" x1="64" y1="90"  x2="78" y2="90"/>
+          <line class="beaker-tick" x1="64" y1="125" x2="78" y2="125"/>
+          <line class="beaker-tick" x1="64" y1="160" x2="78" y2="160"/>
+          <line class="beaker-tick" x1="64" y1="195" x2="78" y2="195"/>
+
+          <!-- Verre du bécher -->
+          <path class="beaker-glass" d="M56,52 L56,206 Q56,222 72,222 L128,222 Q144,222 144,206 L144,52"/>
+          <!-- Rebord + bec verseur -->
+          <path class="beaker-rim" d="M48,52 L152,52 L160,44"/>
+          <!-- Reflet vertical -->
+          <line class="beaker-shine" x1="68" y1="70" x2="68" y2="190"/>
+        </svg>
+
+        <div class="lab-tap-hint" id="lab-tap-hint">Touchez le bécher pour révéler</div>
+      </div>
+
+      <div class="lab-answer" id="lab-answer" hidden>
+        <p class="lab-answer-label">RÉPONSE</p>
+        <h3 class="lab-answer-text" id="lab-answer-text"></h3>
+        <p class="lab-exp" id="lab-exp"></p>
+      </div>
+    </div>
+
+    <div class="lab-actions" id="lab-actions">
+      <button class="btn-action btn-wrong" id="btn-lab-wrong">
+        <span class="action-icon">✗</span>
+        <span>Je ne savais pas</span>
+      </button>
+      <button class="btn-action btn-correct" id="btn-lab-correct">
+        <span class="action-icon">✓</span>
+        <span>Je savais !</span>
+      </button>
+    </div>
+  </div>
+
   <!-- ── RESULTS ────────────────────────────────────────────────────────── -->
   <div id="screen-results" class="screen">
     <div class="results-container">

@@ -22,6 +22,7 @@ class CultureG {
     this.bindCardUI();
     this.bindResultsUI();
     this.bindVinylUI();
+    this.bindLabUI();
 
     const session = await auth.getSession();
     if (session) {
@@ -156,6 +157,7 @@ class CultureG {
 
   startSession(categoryKey) {
     if (categoryKey === 'musique') { this.startVinylSession(categoryKey); return; }
+    if (categoryKey === 'science') { this.startLabSession(categoryKey); return; }
     this.currentCategory = categoryKey;
     this.deck = this._shuffle(QUESTIONS.filter(q => q.cat === categoryKey));
     this.currentIndex = 0;
@@ -575,6 +577,122 @@ class CultureG {
         this.loadVinylSong(this.currentIndex);
       }
     }, 2200);
+  }
+
+  // ─── LAB (SCIENCE) SESSION ───────────────────────────────────────────────
+
+  startLabSession(categoryKey) {
+    this.currentCategory = categoryKey;
+    this.deck = this._shuffle(QUESTIONS.filter(q => q.cat === categoryKey));
+    this.currentIndex = 0;
+    this.sessionCorrect = 0;
+    this._labRevealed = false;
+
+    this.$('lab-total').textContent = this.deck.length;
+    this.$('lab-score').textContent = '0 ✓';
+
+    this.showScreen('lab');
+    this.loadLabQuestion(0, true);
+  }
+
+  _labPalette() {
+    return [
+      ['#4FC3E8', '#2E7BC4'], // cyan
+      ['#7BE38C', '#2FA84F'], // vert
+      ['#E87BC8', '#B43A8E'], // magenta
+      ['#F5C45A', '#D48A1E'], // ambre
+      ['#B68BE8', '#7A4FC4'], // violet
+      ['#F58A6A', '#D4451E'], // orange-rouge
+    ];
+  }
+
+  loadLabQuestion(index, first = false) {
+    const q = this.deck[index];
+    const stage = this.$('lab-beaker-stage');
+    const beaker = this.$('lab-beaker');
+    const [light, deep] = this._labPalette()[index % this._labPalette().length];
+
+    this.$('lab-current').textContent = index + 1;
+    this.$('lab-question').textContent = q.q;
+
+    beaker.style.setProperty('--lab-color', light);
+    beaker.style.setProperty('--lab-deep', deep);
+    stage.style.setProperty('--lab-color', light);
+    this.$('screen-lab').style.setProperty('--lab-color', light);
+
+    // Reset état
+    beaker.classList.remove('filling', 'bubbling');
+    stage.classList.remove('lit');
+    this.$('lab-answer').hidden = true;
+    this.$('lab-actions').hidden = true;
+    this.$('lab-tap-hint').classList.remove('hidden');
+    this._labRevealed = false;
+
+    const reveal = () => {
+      const wrap = this.$('lab-arena');
+      if (wrap) wrap.style.opacity = '1';
+    };
+
+    if (first) {
+      reveal();
+    } else {
+      const arena = this.$('lab-arena');
+      arena.style.transition = 'opacity 0.25s ease';
+      arena.style.opacity = '0';
+      setTimeout(() => { arena.style.opacity = '1'; }, 260);
+    }
+  }
+
+  revealLab() {
+    if (this._labRevealed) return;
+    this._labRevealed = true;
+
+    const q = this.deck[this.currentIndex];
+    const beaker = this.$('lab-beaker');
+    const stage = this.$('lab-beaker-stage');
+
+    this.$('lab-tap-hint').classList.add('hidden');
+    beaker.classList.add('filling', 'bubbling');
+    stage.classList.add('lit');
+
+    // À la fin du remplissage : on dévoile la réponse
+    setTimeout(() => {
+      this.$('lab-answer-text').textContent = q.a;
+      this.$('lab-exp').textContent = q.exp;
+      this.$('lab-answer').hidden = false;
+      this.$('lab-actions').hidden = false;
+      beaker.classList.remove('bubbling');
+    }, 1100);
+  }
+
+  labAnswer(correct) {
+    if (!this._labRevealed) return;
+    if (this._labAnimating) return;
+    this._labAnimating = true;
+
+    const q = this.deck[this.currentIndex];
+    if (correct) this.sessionCorrect++;
+    this.$('lab-score').textContent = `${this.sessionCorrect} ✓`;
+
+    this._incrementDaily();
+    this._saveLocalScore(correct);
+    auth.saveProgress(q.id, q.cat, correct);
+
+    this.currentIndex++;
+    if (this.currentIndex >= this.deck.length) {
+      this.showResults();
+      this._labAnimating = false;
+    } else {
+      this.loadLabQuestion(this.currentIndex);
+      setTimeout(() => { this._labAnimating = false; }, 280);
+    }
+  }
+
+  bindLabUI() {
+    this.$('btn-back-lab').addEventListener('click', () => this.enterHome());
+    this.$('lab-beaker-stage').addEventListener('click', () => this.revealLab());
+    this.$('btn-lab-wrong').addEventListener('click', () => this.labAnswer(false));
+    this.$('btn-lab-correct').addEventListener('click', () => this.labAnswer(true));
   }
 
   bindVinylUI() {
