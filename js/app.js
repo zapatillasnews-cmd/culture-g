@@ -166,6 +166,7 @@ class CultureG {
     this.$('session-score').textContent = '0 ✓';
 
     this.showScreen('cards');
+    this.$('screen-cards').classList.toggle('art-mode', categoryKey === 'art');
     this.renderStack();
     this.updateTapHint(true);
     this.$('card-actions').classList.remove('visible');
