@@ -1,4 +1,4 @@
-const CACHE = 'culture-g-v8';
+const CACHE = 'culture-g-v9';
 
 // Ces fichiers DOIVENT être mis en cache pour que l'app fonctionne offline
 const CORE = [
@@ -101,17 +101,42 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  e.respondWith(
-    caches.match(e.request).then(cached => {
-      const network = fetch(e.request).then(res => {
-        const sameOrigin = e.request.url.startsWith(self.location.origin);
-        const isImage = e.request.destination === 'image';
-        if (res.ok && (sameOrigin || isImage)) {
+  const req = e.request;
+  const url = new URL(req.url);
+  const sameOrigin = url.origin === self.location.origin;
+  const isImage = req.destination === 'image';
+
+  // Network-first pour le code de l'app (HTML/CSS/JS same-origin) :
+  // on a TOUJOURS la dernière version en ligne, le cache ne sert que hors-ligne.
+  const isCore = sameOrigin && (
+    req.mode === 'navigate' ||
+    url.pathname === '/' ||
+    /\.(html|css|js|webmanifest)$/.test(url.pathname)
+  );
+
+  if (isCore) {
+    e.respondWith(
+      fetch(req).then(res => {
+        if (res.ok) {
           const clone = res.clone();
-          caches.open(CACHE).then(c => c.put(e.request, clone));
+          caches.open(CACHE).then(c => c.put(req, clone));
         }
         return res;
-      });
+      }).catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // Cache-first (stale-while-revalidate) pour les images, polices, etc.
+  e.respondWith(
+    caches.match(req).then(cached => {
+      const network = fetch(req).then(res => {
+        if (res.ok && (sameOrigin || isImage)) {
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put(req, clone));
+        }
+        return res;
+      }).catch(() => cached);
       return cached || network;
     })
   );
