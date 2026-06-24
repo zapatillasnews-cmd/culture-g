@@ -172,12 +172,53 @@ const QUESTIONS = [
   { id: 68, cat: 'culinaire', q: "Qu'est-ce que la 'réaction de Maillard' en cuisine ?", a: "La réaction chimique entre acides aminés et sucres qui dore et parfume les aliments", exp: "Décrite par Louis-Camille Maillard en 1912, cette réaction est responsable du goût et de la couleur du pain grillé, de la viande saisie, du café torréfié…", diff: 3 },
 
   // ── MUSIQUE ────────────────────────────────────────────────────────────────
-  { id: 69, cat: 'musique', q: "Combien de cordes possède une guitare classique ?", a: "6 cordes", exp: "Accordées Mi-La-Ré-Sol-Si-Mi (de la plus grave à la plus aiguë). La guitare de 12 cordes double chaque corde pour un son plus riche.", diff: 1 },
-  { id: 70, cat: 'musique', q: "Quel groupe britannique a enregistré 'Bohemian Rhapsody' ?", a: "Queen (1975)", exp: "Composée par Freddie Mercury, cette chanson de 6 minutes était révolutionnaire. Elle est restée #1 au Royaume-Uni 9 semaines, puis à nouveau après la mort de Mercury en 1991.", diff: 1 },
-  { id: 71, cat: 'musique', q: "Quel chanteur français est surnommé 'La Môme' ?", a: "Édith Piaf", exp: "Édith Piaf (1915-1963) mesure 1,47 m — d'où son surnom 'La Môme Piaf' (petit moineau). Elle est notamment connue pour 'La Vie en rose' et 'Non, je ne regrette rien'.", diff: 1 },
-  { id: 72, cat: 'musique', q: "Dans quel pays est né le reggae ?", a: "La Jamaïque (fin des années 1960)", exp: "Le reggae émerge en Jamaïque à la fin des années 60, popularisé internationalement par Bob Marley. Il est influencé par le ska et le rocksteady.", diff: 1 },
-  { id: 73, cat: 'musique', q: "Qui est le compositeur de 'La Flûte enchantée' ?", a: "Wolfgang Amadeus Mozart (1791)", exp: "La Flûte enchantée est le dernier opéra de Mozart, composé quelques mois avant sa mort. C'est l'opéra le plus joué en Allemagne et l'un des plus joués au monde.", diff: 2 },
-  { id: 74, cat: 'musique', q: "Quel album des Beatles est souvent classé meilleur album de tous les temps ?", a: "Sgt. Pepper's Lonely Hearts Club Band (1967)", exp: "Régulièrement n°1 dans les classements critiques, cet album introduit des techniques d'enregistrement révolutionnaires et le concept d'album cohérent comme œuvre d'art.", diff: 2 },
-  { id: 75, cat: 'musique', q: "Qui a composé les 'Quatre Saisons' ?", a: "Antonio Vivaldi (vers 1720)", exp: "Les Quatre Saisons sont 4 concertos pour violon composés par Vivaldi. Chaque concerto décrit musicalement une saison, accompagné d'un sonnet explicatif.", diff: 2 },
-  { id: 76, cat: 'musique', q: "Quel genre musical est né à Chicago et Detroit dans les années 1980 ?", a: "La house et la techno", exp: "La house naît à Chicago (DJ Frankie Knuckles au Warehouse) et la techno à Detroit (Juan Atkins, Derrick May, Kevin Saunderson). Deux piliers de la musique électronique mondiale.", diff: 3 },
+  { id: 69, cat: 'musique', mode: 'vinyl',
+    song: "Bohemian Rhapsody", artist: "Queen", year: "1975", diff: 1, vinylColor: "#B71C1C",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a4/17/20/a4172095-6812-79b6-1ba9-ae10b74ec2c7/mzaf_981426288313751423.plus.aac.p.m4a",
+    exp: "Composée par Freddie Mercury, cette suite rock de 6 minutes brisait tous les codes. 9 semaines n°1 en UK, élue meilleure chanson de tous les temps par de nombreux classements." },
+
+  { id: 70, cat: 'musique', mode: 'vinyl',
+    song: "Billie Jean", artist: "Michael Jackson", year: "1982", diff: 1, vinylColor: "#0D47A1",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dc/bc/8a/dcbc8a3e-4ce1-c00d-cc02-eda2212053c7/mzaf_8347559338388601510.plus.aac.p.m4a",
+    exp: "Extrait de Thriller (1982), l'album le plus vendu de l'histoire. Michael Jackson a inventé le moonwalk lors de sa première performance de cette chanson à la télévision en 1983." },
+
+  { id: 71, cat: 'musique', mode: 'vinyl',
+    song: "Hotel California", artist: "Eagles", year: "1977", diff: 1, vinylColor: "#E65100",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c7/95/a3/c795a34c-e485-29ce-7666-3bf69d208266/mzaf_16021391925102282319.plus.aac.p.m4a",
+    exp: "Hymne des Eagles (1977), ses paroles mystérieuses décrivent un voyageur piégé dans un hôtel — métaphore du mode de vie des rock stars à Hollywood." },
+
+  { id: 72, cat: 'musique', mode: 'vinyl',
+    song: "La Vie en rose", artist: "Édith Piaf", year: "1946", diff: 1, vinylColor: "#880E4F",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/1e/e0/8d/1ee08da2-a8ea-0d4b-6d56-5db76f866dbf/mzaf_13978184747254142650.plus.aac.p.m4a",
+    exp: "Composée par Édith Piaf en 1945 pour un amour perdu pendant la guerre, c'est l'une des chansons françaises les plus connues et les plus reprises au monde." },
+
+  { id: 73, cat: 'musique', mode: 'vinyl',
+    song: "Thriller", artist: "Michael Jackson", year: "1983", diff: 1, vinylColor: "#4A148C",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/58/8c/cb/588ccb9a-ab79-4a38-43b5-d4c24ea42859/mzaf_2083607504726567992.plus.aac.p.m4a",
+    exp: "Le clip de Thriller (1983) réalisé par John Landis dure 14 minutes — le plus long et le plus cher de l'histoire. La danse des zombies est l'une des chorégraphies les plus imitées au monde." },
+
+  { id: 74, cat: 'musique', mode: 'vinyl',
+    song: "Stairway to Heaven", artist: "Led Zeppelin", year: "1971", diff: 2, vinylColor: "#1B5E20",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/60/61/5f/60615fd1-7425-78b3-21ab-fed7411a89ea/mzaf_7178841208140363975.plus.aac.p.m4a",
+    exp: "Issue de Led Zeppelin IV (1971), cette chanson de 8 minutes passe du folk acoustique au hard rock. Robert Plant a écrit les paroles spontanément, assis au coin du feu en studio." },
+
+  { id: 75, cat: 'musique', mode: 'vinyl',
+    song: "Smells Like Teen Spirit", artist: "Nirvana", year: "1991", diff: 2, vinylColor: "#006064",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/a6/53/1e/a6531efa-397c-eb73-ecab-9b2790c1471e/mzaf_16440344883389407474.plus.aac.p.m4a",
+    exp: "Premier single de Nevermind (1991), cette chanson a propulsé le grunge sur la scène mondiale et signé la fin de la domination du hair metal des années 80." },
+
+  { id: 76, cat: 'musique', mode: 'vinyl',
+    song: "Rolling in the Deep", artist: "Adele", year: "2010", diff: 1, vinylColor: "#4E342E",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/1f/aa/38/1faa38cc-3137-1409-ccb9-2eaf92a1b386/mzaf_5683578537884510102.plus.aac.p.m4a",
+    exp: "Écrit après une rupture en seulement 10 minutes, ce premier single de l'album 21 a été enregistré en live en une seule prise, avec la batterie placée dans un couloir pour l'acoustique." },
+
+  { id: 90, cat: 'musique', mode: 'vinyl',
+    song: "Heroes", artist: "David Bowie", year: "1977", diff: 2, vinylColor: "#37474F",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1f/f3/12/1ff3122a-eb3e-373d-d524-cfe00de9b19a/mzaf_8446634475827049231.plus.aac.p.m4a",
+    exp: "Composée à Berlin en 1977 avec Brian Eno, Heroes s'inspire d'un couple aperçu s'embrassant au pied du Mur de Berlin. Bowie a enregistré les vocaux avec 3 micros à distances différentes." },
+
+  { id: 91, cat: 'musique', mode: 'vinyl',
+    song: "Get Lucky", artist: "Daft Punk", year: "2013", diff: 1, vinylColor: "#F57F17",
+    preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/d4/d3/1e/d4d31eb4-7405-b806-8346-3c52ad5b4cf4/mzaf_8095545455942962509.plus.aac.p.m4a",
+    exp: "Extrait de Random Access Memories (2013, 5 Grammy), produit avec Pharrell Williams et le guitariste Nile Rodgers, ce titre symbolise le retour à la musique jouée en live et a dominé les charts mondiaux." },
 ];

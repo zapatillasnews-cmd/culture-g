@@ -103,6 +103,126 @@
     </div>
   </div>
 
+  <!-- ── VINYL ─────────────────────────────────────────────────────────────── -->
+  <div id="screen-vinyl" class="screen">
+    <header class="vinyl-header">
+      <button id="btn-back-vinyl" class="btn-icon-white" aria-label="Retour">←</button>
+      <div class="vinyl-progress">
+        <span id="vinyl-current">1</span> / <span id="vinyl-total">10</span>
+      </div>
+      <div id="vinyl-score" class="session-score">0 ✓</div>
+    </header>
+
+    <div class="vinyl-arena">
+      <div class="vinyl-stage" id="vinyl-stage">
+        <!-- Vinyl tournant -->
+        <div class="vinyl-wrap" id="vinyl-wrap">
+          <svg class="vinyl-disc" id="vinyl-disc" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="vg-gloss" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+                <stop offset="55%" stop-color="rgba(255,255,255,0.04)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+              </radialGradient>
+              <radialGradient id="vg-label" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#FEFCF5"/>
+                <stop offset="100%" stop-color="#EAE0CE"/>
+              </radialGradient>
+              <radialGradient id="vg-edge" cx="50%" cy="50%" r="50%">
+                <stop offset="83%" stop-color="rgba(0,0,0,0)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
+              </radialGradient>
+            </defs>
+            <!-- Disque principal -->
+            <circle cx="150" cy="150" r="149" fill="var(--vinyl-color,#B71C1C)"/>
+            <!-- Sillon extérieur -->
+            <circle cx="150" cy="150" r="146" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="2"/>
+            <circle cx="150" cy="150" r="143" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <!-- Sillons -->
+            <circle cx="150" cy="150" r="139" fill="none" stroke="rgba(0,0,0,0.13)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="135" fill="none" stroke="rgba(0,0,0,0.10)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="131" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="127" fill="none" stroke="rgba(0,0,0,0.10)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="123" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="119" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="115" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="111" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="107" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="103" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="99"  fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="95"  fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="91"  fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="87"  fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="83"  fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="79"  fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="75"  fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="71"  fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+            <!-- Étiquette centrale -->
+            <circle cx="150" cy="150" r="65" fill="url(#vg-label)"/>
+            <circle cx="150" cy="150" r="65" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="62" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="0.5"/>
+            <!-- Reflet brillant -->
+            <circle cx="150" cy="150" r="149" fill="url(#vg-gloss)"/>
+            <!-- Assombrissement du bord -->
+            <circle cx="150" cy="150" r="149" fill="url(#vg-edge)"/>
+            <!-- Trou central -->
+            <circle cx="150" cy="150" r="6" fill="#0A0A0A"/>
+            <circle cx="150" cy="150" r="6" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+          </svg>
+          <!-- Label overlay statique (ne tourne pas) -->
+          <div class="vinyl-label-overlay">
+            <span class="vlabel-artist" id="vlabel-artist"></span>
+            <span class="vlabel-song" id="vlabel-song"></span>
+            <span class="vlabel-year" id="vlabel-year"></span>
+          </div>
+          <!-- Overlay tap-to-play (si autoplay bloqué) -->
+          <div class="vinyl-tap-overlay" id="vinyl-tap-overlay" hidden>
+            <span class="vinyl-tap-icon">▶</span>
+          </div>
+        </div>
+
+        <!-- Bras de lecture (tourne-disque) -->
+        <svg class="tonearm-svg" id="tonearm" viewBox="0 0 100 185" xmlns="http://www.w3.org/2000/svg">
+          <!-- Pivot -->
+          <circle cx="82" cy="16" r="10" fill="#7A7A7A" stroke="#999" stroke-width="1"/>
+          <circle cx="82" cy="16" r="5.5" fill="#B0B0B0"/>
+          <circle cx="82" cy="16" r="2" fill="#888"/>
+          <!-- Bras -->
+          <path d="M82,16 Q72,78 49,158" fill="none" stroke="#6A6A6A" stroke-width="5" stroke-linecap="round"/>
+          <path d="M82,16 Q72,78 49,158" fill="none" stroke="#AAAAAA" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Headshell -->
+          <rect x="37" y="152" width="24" height="14" rx="3" fill="#5A5A5A"/>
+          <rect x="38" y="153" width="22" height="5" rx="1" fill="#888"/>
+          <!-- Aiguille -->
+          <line x1="49" y1="166" x2="49" y2="174" stroke="#444" stroke-width="2.5" stroke-linecap="round"/>
+          <ellipse cx="49" cy="176" rx="2.5" ry="2" fill="#222"/>
+        </svg>
+      </div>
+
+      <!-- Infos chanson -->
+      <div class="vinyl-info">
+        <h2 class="vinyl-song-name" id="vinyl-song-name"></h2>
+        <p class="vinyl-artist-line" id="vinyl-artist-line"></p>
+      </div>
+
+      <!-- Anecdote (apparaît après réponse) -->
+      <div class="vinyl-exp" id="vinyl-exp" hidden></div>
+    </div>
+
+    <audio id="vinyl-audio" loop preload="auto"></audio>
+
+    <div class="vinyl-actions" id="vinyl-actions">
+      <button class="btn-action btn-wrong" id="btn-vinyl-wrong">
+        <span class="action-icon">✗</span>
+        <span>Je ne savais pas</span>
+      </button>
+      <button class="btn-action btn-correct" id="btn-vinyl-correct">
+        <span class="action-icon">✓</span>
+        <span>Je savais !</span>
+      </button>
+    </div>
+  </div>
+
   <!-- ── RESULTS ────────────────────────────────────────────────────────── -->
   <div id="screen-results" class="screen">
     <div class="results-container">

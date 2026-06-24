@@ -21,6 +21,7 @@ class CultureG {
     this.bindHomeUI();
     this.bindCardUI();
     this.bindResultsUI();
+    this.bindVinylUI();
 
     const session = await auth.getSession();
     if (session) {
@@ -92,6 +93,7 @@ class CultureG {
   // ─── HOME ────────────────────────────────────────────────────────────────
 
   async enterHome() {
+    this._stopVinyl();
     this.renderCategories();
     this.updateDailyProgress();
     await this.refreshScore();
@@ -153,6 +155,7 @@ class CultureG {
   // ─── CARDS SESSION ───────────────────────────────────────────────────────
 
   startSession(categoryKey) {
+    if (categoryKey === 'musique') { this.startVinylSession(categoryKey); return; }
     this.currentCategory = categoryKey;
     this.deck = this._shuffle(QUESTIONS.filter(q => q.cat === categoryKey));
     this.currentIndex = 0;
@@ -462,6 +465,145 @@ class CultureG {
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
+  }
+
+  // ─── VINYL SESSION ───────────────────────────────────────────────────────
+
+  startVinylSession(categoryKey) {
+    this.currentCategory = categoryKey;
+    this.deck = this._shuffle(QUESTIONS.filter(q => q.cat === categoryKey));
+    this.currentIndex = 0;
+    this.sessionCorrect = 0;
+    this._vinylAnswered = false;
+
+    this.$('vinyl-total').textContent = this.deck.length;
+    this.$('vinyl-score').textContent = '0 ✓';
+
+    this.showScreen('vinyl');
+    this.loadVinylSong(0, true);
+  }
+
+  loadVinylSong(index, first = false) {
+    const song = this.deck[index];
+    const wrap = this.$('vinyl-wrap');
+    const disc = this.$('vinyl-disc');
+    const stage = this.$('vinyl-stage');
+    const arm = this.$('tonearm');
+
+    this.$('vinyl-current').textContent = index + 1;
+    this.$('vinyl-song-name').textContent = song.song;
+    this.$('vinyl-artist-line').textContent = `${song.artist} · ${song.year}`;
+    this.$('vlabel-artist').textContent = song.artist.toUpperCase();
+    this.$('vlabel-song').textContent = song.song;
+    this.$('vlabel-year').textContent = song.year;
+
+    this.$('vinyl-exp').hidden = true;
+    this.$('vinyl-tap-overlay').hidden = true;
+    this._vinylAnswered = false;
+
+    // Lift arm, fade vinyl, swap color, drop arm, play
+    arm.classList.remove('playing');
+
+    const doLoad = () => {
+      disc.style.setProperty('--vinyl-color', song.vinylColor);
+      stage.style.setProperty('--vinyl-color', song.vinylColor);
+      wrap.classList.remove('changing');
+
+      setTimeout(() => {
+        arm.classList.add('playing');
+        this._playVinyl(song.preview);
+      }, 300);
+    };
+
+    if (first) {
+      doLoad();
+    } else {
+      wrap.classList.add('changing');
+      disc.classList.remove('spinning');
+      setTimeout(doLoad, 280);
+    }
+  }
+
+  _playVinyl(src) {
+    const audio = this.$('vinyl-audio');
+    const disc = this.$('vinyl-disc');
+    audio.src = src;
+    audio.volume = 0.75;
+    audio.play()
+      .then(() => {
+        disc.classList.add('spinning');
+        this.$('vinyl-tap-overlay').hidden = true;
+      })
+      .catch(() => {
+        disc.classList.remove('spinning');
+        this.$('vinyl-tap-overlay').hidden = false;
+      });
+  }
+
+  _stopVinyl() {
+    const audio = this.$('vinyl-audio');
+    if (audio) { audio.pause(); audio.src = ''; }
+    const disc = this.$('vinyl-disc');
+    if (disc) disc.classList.remove('spinning');
+    const arm = this.$('tonearm');
+    if (arm) arm.classList.remove('playing');
+  }
+
+  vinylAnswer(correct) {
+    if (this._vinylAnswered) return;
+    this._vinylAnswered = true;
+
+    const song = this.deck[this.currentIndex];
+    if (correct) this.sessionCorrect++;
+    this.$('vinyl-score').textContent = `${this.sessionCorrect} ✓`;
+
+    this._incrementDaily();
+    this._saveLocalScore(correct);
+    auth.saveProgress(song.id, song.cat, correct);
+
+    // Montre l'anecdote puis passe à la suivante
+    const exp = this.$('vinyl-exp');
+    exp.textContent = song.exp;
+    exp.hidden = false;
+
+    setTimeout(() => {
+      this.currentIndex++;
+      if (this.currentIndex >= this.deck.length) {
+        this._stopVinyl();
+        this.showResults();
+      } else {
+        this.loadVinylSong(this.currentIndex);
+      }
+    }, 2200);
+  }
+
+  bindVinylUI() {
+    this.$('btn-back-vinyl').addEventListener('click', () => this.enterHome());
+    this.$('btn-vinyl-wrong').addEventListener('click', () => this.vinylAnswer(false));
+    this.$('btn-vinyl-correct').addEventListener('click', () => this.vinylAnswer(true));
+
+    // Tap sur le vinyl : play/pause
+    this.$('vinyl-wrap').addEventListener('click', () => {
+      const audio = this.$('vinyl-audio');
+      const disc = this.$('vinyl-disc');
+      if (!audio.src) return;
+      if (audio.paused) {
+        audio.play().then(() => {
+          disc.classList.add('spinning');
+          this.$('vinyl-tap-overlay').hidden = true;
+        }).catch(() => {});
+      } else {
+        audio.pause();
+        disc.classList.remove('spinning');
+      }
+    });
+
+    // Tap-to-play overlay
+    this.$('vinyl-tap-overlay').addEventListener('click', e => {
+      e.stopPropagation();
+      const song = this.deck[this.currentIndex];
+      if (song) this._playVinyl(song.preview);
+    });
   }
 
   _barcode() {
