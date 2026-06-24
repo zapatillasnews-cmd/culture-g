@@ -117,6 +117,12 @@ const QUESTIONS = [
   { id: 78, cat: 'art', title: "Olympia", artist: "Édouard Manet", year: "1863", diff: 3,
     img: "assets/art/olympia-manet.jpg",
     exp: "1863. Femme nue allongée, regardant le spectateur droit dans les yeux — scandale absolu au Salon de 1865. Manet s'inspire de la Vénus d'Urbin du Titien, mais remplace la déesse par une prostituée moderne. Musée d'Orsay, Paris." },
+  { id: 79, cat: 'art', title: "La Ronde de nuit", artist: "Rembrandt van Rijn", year: "1642", diff: 2,
+    img: "assets/art/ronde-nuit.jpg",
+    exp: "1642. Chef-d'œuvre du baroque hollandais représentant une milice en marche, dont la composition dynamique et l'utilisation révolutionnaire de la lumière et de l'ombre sidérèrent les contemporains. Rijksmuseum, Amsterdam." },
+  { id: 80, cat: 'art', title: "Les Nymphéas", artist: "Claude Monet", year: "1906", diff: 2,
+    img: "assets/art/nympheas.jpg",
+    exp: "1906. Série de 250 toiles peintes sur 30 ans dans le jardin de Giverny. Monet, atteint de cataractes, s'affranchit progressivement de la réalité pour aboutir à une abstraction quasi totale. Musée de l'Orangerie, Paris." },
 
   // ── CINÉMA ─────────────────────────────────────────────────────────────────
   { id: 53, cat: 'cinema', q: "Quel film de Steven Spielberg est le plus rentable de sa carrière ?", a: "E.T. l'extra-terrestre (1982)", exp: "E.T. a tenu le record du film le plus rentable de l'histoire pendant 11 ans, avant d'être détrôné par Jurassic Park, puis Titanic.", diff: 2 },
