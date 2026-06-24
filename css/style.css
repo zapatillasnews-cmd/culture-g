@@ -440,6 +440,7 @@ body {
   cursor: grab;
   will-change: transform;
   transform-origin: center bottom;
+  touch-action: pan-y;
 }
 
 .card:active { cursor: grabbing; }
