@@ -349,12 +349,13 @@ class CultureG {
     this._swipeAbort = new AbortController();
     const { signal } = this._swipeAbort;
 
-    let startX = 0;
+    let startX = 0, startY = 0;
     let dragX = 0;
     let dragging = false;
 
     el.addEventListener('pointerdown', (e) => {
       startX = e.clientX;
+      startY = e.clientY;
       dragX = 0;
       dragging = false;
       el.setPointerCapture(e.pointerId);
@@ -364,6 +365,12 @@ class CultureG {
     el.addEventListener('pointermove', (e) => {
       if (!el.hasPointerCapture(e.pointerId)) return;
       dragX = e.clientX - startX;
+      const dragY = e.clientY - startY;
+      // Carte révélée + intention verticale → scroll natif
+      if (this.isFlipped && Math.abs(dragY) > Math.abs(dragX) && Math.abs(dragY) > 8) {
+        el.releasePointerCapture(e.pointerId);
+        return;
+      }
       if (Math.abs(dragX) > 8) dragging = true;
       if (!dragging) return;
 

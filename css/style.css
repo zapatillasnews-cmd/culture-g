@@ -918,6 +918,7 @@ body {
   margin-top: 8px;
   flex: 1;
   overflow: hidden;
+  min-height: 0;
   transition: filter 0.35s ease, opacity 0.35s ease;
   filter: blur(5.5px);
   opacity: 0.5;
@@ -926,7 +927,11 @@ body {
 .card-art.flipped .art-answer {
   filter: blur(0);
   opacity: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.card-art.flipped .art-answer::-webkit-scrollbar { display: none; }
 
 .art-artist {
   font-family: var(--font-serif);
@@ -947,6 +952,11 @@ body {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.card-art.flipped .art-exp {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
 }
 
 .art-hint-reveal {

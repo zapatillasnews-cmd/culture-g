@@ -1,5 +1,7 @@
-const CACHE = 'culture-g-v3';
-const ASSETS = [
+const CACHE = 'culture-g-v4';
+
+// Ces fichiers DOIVENT être mis en cache pour que l'app fonctionne offline
+const CORE = [
   '/',
   '/index.html',
   '/css/style.css',
@@ -8,6 +10,11 @@ const ASSETS = [
   '/js/auth.js',
   '/js/app.js',
   '/manifest.webmanifest',
+  'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap',
+];
+
+// Images en best-effort (ignorées si absentes)
+const IMAGES = [
   '/assets/art/joconde.jpg',
   '/assets/art/nuit-etoilee.jpg',
   '/assets/art/le-cri.jpg',
@@ -18,12 +25,28 @@ const ASSETS = [
   '/assets/art/impression-soleil.jpg',
   '/assets/art/le-baiser.jpg',
   '/assets/art/la-cene.jpg',
-  'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap',
+  '/assets/art/guernica.jpg',
+  '/assets/art/montres-molles.jpg',
+  '/assets/art/demoiselles-avignon.jpg',
+  '/assets/art/tournesols.jpg',
+  '/assets/art/radeau-meduse.jpg',
+  '/assets/art/las-meninas.jpg',
+  '/assets/art/arnolfini.jpg',
+  '/assets/art/american-gothic.jpg',
+  '/assets/art/grande-jatte.jpg',
+  '/assets/art/frida-kahlo.jpg',
 ];
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE).then(async c => {
+      await c.addAll(CORE);
+      // Images en best-effort : on tente, on ignore les erreurs
+      await Promise.allSettled(
+        IMAGES.map(url => fetch(url).then(r => r.ok ? c.put(url, r) : null).catch(() => null))
+      );
+      self.skipWaiting();
+    })
   );
 });
 
