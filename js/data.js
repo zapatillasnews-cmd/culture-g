@@ -99,6 +99,18 @@ const QUESTIONS = [
   { id: 48, cat: 'art', title: "American Gothic", artist: "Grant Wood", year: "1930", diff: 2,
     img: "assets/art/american-gothic.jpg",
     exp: "1930. Icône de la peinture américaine représentant un fermier et sa fille (souvent pris pour mari et femme) devant une maison de style gothique charpentier. Art Institute of Chicago." },
+  { id: 49, cat: 'art', title: "Saturne dévorant son fils", artist: "Francisco de Goya", year: "1823", diff: 3,
+    img: "assets/art/saturne-goya.jpg",
+    exp: "1823. L'une des 14 « Peintures noires » que Goya réalisa directement sur les murs de sa maison à la fin de sa vie. Scène terrifiante tirée de la mythologie : Saturne dévore ses enfants de peur d'être détrôné. Musée du Prado, Madrid." },
+  { id: 50, cat: 'art', title: "L'École d'Athènes", artist: "Raphaël", year: "1511", diff: 3,
+    img: "assets/art/ecole-athenes.jpg",
+    exp: "1511. Fresque monumentale (770 cm de large) commandée par le pape Jules II pour ses appartements au Vatican. Elle réunit les plus grands philosophes de l'Antiquité : Platon (au centre) pointe vers le ciel, Aristote vers la terre. Musées du Vatican." },
+  { id: 51, cat: 'art', title: "Le Radeau de la Méduse", artist: "Théodore Géricault", year: "1819", diff: 3,
+    img: "assets/art/radeau-meduse.jpg",
+    exp: "1819. Toile monumentale (5 × 7 m) inspirée du naufrage réel de la frégate Méduse en 1816, qui causa la mort de 147 personnes. Géricault a interviewé des survivants et peint des cadavres pour se documenter. Musée du Louvre." },
+  { id: 52, cat: 'art', title: "Autoportrait au collier d'épines", artist: "Frida Kahlo", year: "1940", diff: 2,
+    img: "assets/art/frida-kahlo.jpg",
+    exp: "1940. L'une des œuvres les plus connues de Kahlo, peinte après son divorce d'avec Diego Rivera. Le colibri porte-bonheur, le chat noir et le singe renvoient à la symbolique mexicaine. University of Texas, Austin." },
 
   // ── CINÉMA ─────────────────────────────────────────────────────────────────
   { id: 53, cat: 'cinema', q: "Quel film de Steven Spielberg est le plus rentable de sa carrière ?", a: "E.T. l'extra-terrestre (1982)", exp: "E.T. a tenu le record du film le plus rentable de l'histoire pendant 11 ans, avant d'être détrôné par Jurassic Park, puis Titanic.", diff: 2 },
