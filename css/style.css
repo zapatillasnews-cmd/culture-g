@@ -1500,6 +1500,285 @@ body {
   box-sizing: border-box;
 }
 
+/* ─── HISTOIRE (musée — événements) ─────────────────────────────────────── */
+#screen-histoire {
+  background:
+    radial-gradient(ellipse 72% 42% at 50% 0%, rgba(125,82,30,0.32) 0%, transparent 60%),
+    #0B0906;
+  display: flex;
+  flex-direction: column;
+}
+
+.hist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 60px;
+  margin-top: env(safe-area-inset-top, 0px);
+  flex-shrink: 0;
+}
+
+.hist-progress {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(245,235,215,0.5);
+  letter-spacing: 0.05em;
+}
+
+.hist-arena {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 4px 14px 10px;
+  min-height: 0;
+  transition: opacity 0.25s ease;
+}
+
+.hist-card {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #0F0B05;
+  border: 1px solid rgba(245,235,215,0.07);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  cursor: pointer;
+}
+
+/* ── Image plein cadre ── */
+.hist-image {
+  position: relative;
+  flex: 1 1 56%;
+  min-height: 150px;
+  background-size: cover;
+  background-position: center;
+  background-color: #1a140c;
+}
+
+.hist-image-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.00) 28%,
+    rgba(15,11,5,0.45) 64%,
+    rgba(15,11,5,0.92) 100%);
+}
+
+/* Dates verticales (bord droit de l'image) */
+.hist-marks {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.hist-mark-top,
+.hist-mark-bot {
+  writing-mode: vertical-rl;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(245,236,216,0.92);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+}
+
+.hist-mark-line {
+  width: 1px;
+  height: 42px;
+  background: rgba(245,236,216,0.55);
+}
+
+/* Titre en surimpression */
+.hist-title-box {
+  position: absolute;
+  left: 22px;
+  right: 64px;
+  bottom: 16px;
+}
+
+.hist-kicker {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(232,180,110,0.95);
+  margin-bottom: 9px;
+}
+
+.hist-title {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: clamp(27px, 8vw, 39px);
+  line-height: 1.04;
+  color: #F4EAD2;
+  text-shadow: 0 2px 22px rgba(0,0,0,0.65);
+}
+
+/* ── Panneau bas ── */
+.hist-panel {
+  position: relative;
+  flex: 0 0 auto;
+  max-height: 52%;
+  overflow-y: auto;
+  background: linear-gradient(to bottom, #1C1407 0%, #0E0A04 100%);
+  padding: 18px 38px 18px 44px;
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mot vertical (époque) en filigrane à gauche */
+.hist-era {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(17px, 4.8vw, 24px);
+  letter-spacing: 0.08em;
+  color: rgba(239,226,198,0.15);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Année verticale à droite du panneau */
+.hist-year-vert {
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  writing-mode: vertical-rl;
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 4.6vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(245,236,216,0.5);
+}
+
+.hist-panel-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.hist-reveal {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(245,236,216,0.4);
+  background: rgba(255,255,255,0.04);
+  color: #F2E8D2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  animation: hist-pulse 2.2s ease-in-out infinite;
+}
+
+.hist-reveal:active { transform: scale(0.9); }
+
+@keyframes hist-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,180,110,0.0); }
+  50%      { box-shadow: 0 0 0 6px rgba(232,180,110,0.10); }
+}
+
+.hist-card.revealed .hist-reveal {
+  opacity: 0;
+  transform: scale(0.6);
+  pointer-events: none;
+  animation: none;
+}
+
+.hist-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.hist-fact-val {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: #F2E8D2;
+  line-height: 1.2;
+}
+
+.hist-fact-lab {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245,236,216,0.4);
+  margin-top: 2px;
+}
+
+/* Récit (révélé) */
+.hist-desc-wrap {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease, opacity 0.45s ease, margin-top 0.4s ease;
+}
+
+.hist-card.revealed .hist-desc-wrap {
+  max-height: 360px;
+  opacity: 1;
+  margin-top: 16px;
+}
+
+.hist-desc {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: rgba(240,233,220,0.8);
+}
+
+.hist-tap-hint {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232,180,110,0.7);
+}
+
+.hist-card.revealed .hist-tap-hint { display: none; }
+
+.hist-actions {
+  display: flex;
+  gap: 12px;
+  padding: 0 20px calc(20px + var(--safe-bottom));
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hist-actions[hidden] { display: none; }
+
 /* ─── TABLET+ ───────────────────────────────────────────────────────────── */
 @media (min-width: 480px) {
   .card-stack { width: 350px; height: 520px; }

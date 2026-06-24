@@ -316,6 +316,76 @@
     </div>
   </div>
 
+  <!-- ── HISTOIRE (événements — format musée) ───────────────────────────────── -->
+  <div id="screen-histoire" class="screen">
+    <header class="hist-header">
+      <button id="btn-back-hist" class="btn-icon-white" aria-label="Retour">←</button>
+      <div class="hist-progress">
+        <span id="hist-current">1</span> / <span id="hist-total">16</span>
+      </div>
+      <div id="hist-score" class="session-score">0 ✓</div>
+    </header>
+
+    <div class="hist-arena" id="hist-arena">
+      <div class="hist-card" id="hist-card">
+        <!-- Image plein cadre + titre en surimpression -->
+        <div class="hist-image" id="hist-image">
+          <div class="hist-image-veil"></div>
+          <div class="hist-marks">
+            <span class="hist-mark-top" id="hist-mark-top"></span>
+            <span class="hist-mark-line"></span>
+            <span class="hist-mark-bot" id="hist-mark-bot"></span>
+          </div>
+          <div class="hist-title-box">
+            <span class="hist-kicker">◆ HISTOIRE</span>
+            <h2 class="hist-title" id="hist-title"></h2>
+          </div>
+        </div>
+
+        <!-- Panneau bas -->
+        <div class="hist-panel">
+          <span class="hist-era" id="hist-era"></span>
+
+          <div class="hist-panel-main">
+            <button class="hist-reveal" id="hist-reveal" aria-label="Révéler le récit">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
+                <path d="M12 5 L12 19 M5 12 L12 19 L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="hist-facts">
+              <div class="hist-fact">
+                <span class="hist-fact-val" id="hist-place"></span>
+                <span class="hist-fact-lab">Lieu</span>
+              </div>
+              <div class="hist-fact">
+                <span class="hist-fact-val" id="hist-type"></span>
+                <span class="hist-fact-lab">Type</span>
+              </div>
+            </div>
+            <span class="hist-year-vert" id="hist-year-vert"></span>
+          </div>
+
+          <div class="hist-desc-wrap" id="hist-desc-wrap">
+            <p class="hist-desc" id="hist-desc"></p>
+          </div>
+
+          <span class="hist-tap-hint" id="hist-tap-hint">Touchez ↓ pour découvrir le récit</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hist-actions" id="hist-actions" hidden>
+      <button class="btn-action btn-wrong" id="btn-hist-wrong">
+        <span class="action-icon">✗</span>
+        <span>À revoir</span>
+      </button>
+      <button class="btn-action btn-correct" id="btn-hist-correct">
+        <span class="action-icon">✓</span>
+        <span>Je connaissais</span>
+      </button>
+    </div>
+  </div>
+
   <!-- ── RESULTS ────────────────────────────────────────────────────────── -->
   <div id="screen-results" class="screen">
     <div class="results-container">

@@ -1,4 +1,4 @@
-const CACHE = 'culture-g-v7';
+const CACHE = 'culture-g-v8';
 
 // Ces fichiers DOIVENT être mis en cache pour que l'app fonctionne offline
 const CORE = [
@@ -60,6 +60,22 @@ const IMAGES = [
   '/assets/art/chambre-arles.jpg',
   '/assets/art/serment-horaces.jpg',
   '/assets/art/balancoire-fragonard.jpg',
+  '/assets/histoire/pyramides-gizeh.jpg',
+  '/assets/histoire/colisee-rome.jpg',
+  '/assets/histoire/grande-muraille.jpg',
+  '/assets/histoire/colomb-amerique.jpg',
+  '/assets/histoire/imprimerie.jpg',
+  '/assets/histoire/peste-noire.jpg',
+  '/assets/histoire/bastille.jpg',
+  '/assets/histoire/independance-usa.jpg',
+  '/assets/histoire/sacre-napoleon.jpg',
+  '/assets/histoire/premiere-gm.jpg',
+  '/assets/histoire/revolution-russe.jpg',
+  '/assets/histoire/seconde-gm.jpg',
+  '/assets/histoire/hiroshima.jpg',
+  '/assets/histoire/lune-apollo11.jpg',
+  '/assets/histoire/mur-berlin.jpg',
+  '/assets/histoire/11-septembre.jpg',
 ];
 
 self.addEventListener('install', e => {

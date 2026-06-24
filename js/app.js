@@ -23,6 +23,7 @@ class CultureG {
     this.bindResultsUI();
     this.bindVinylUI();
     this.bindLabUI();
+    this.bindHistoireUI();
 
     const session = await auth.getSession();
     if (session) {
@@ -158,6 +159,7 @@ class CultureG {
   startSession(categoryKey) {
     if (categoryKey === 'musique') { this.startVinylSession(categoryKey); return; }
     if (categoryKey === 'science') { this.startLabSession(categoryKey); return; }
+    if (categoryKey === 'histoire') { this.startHistoireSession(categoryKey); return; }
     this.currentCategory = categoryKey;
     this.deck = this._shuffle(QUESTIONS.filter(q => q.cat === categoryKey));
     this.currentIndex = 0;
@@ -693,6 +695,94 @@ class CultureG {
     this.$('lab-beaker-stage').addEventListener('click', () => this.revealLab());
     this.$('btn-lab-wrong').addEventListener('click', () => this.labAnswer(false));
     this.$('btn-lab-correct').addEventListener('click', () => this.labAnswer(true));
+  }
+
+  // ─── HISTOIRE (ÉVÉNEMENTS) SESSION ───────────────────────────────────────
+
+  startHistoireSession(categoryKey) {
+    this.currentCategory = categoryKey;
+    this.deck = this._shuffle(QUESTIONS.filter(q => q.cat === categoryKey));
+    this.currentIndex = 0;
+    this.sessionCorrect = 0;
+    this._histRevealed = false;
+    this._histAnimating = false;
+
+    this.$('hist-total').textContent = this.deck.length;
+    this.$('hist-current').textContent = 1;
+    this.$('hist-score').textContent = '0 ✓';
+
+    this.showScreen('histoire');
+    this.loadHistoireCard(0, true);
+  }
+
+  loadHistoireCard(index, first = false) {
+    const q = this.deck[index];
+    const card = this.$('hist-card');
+
+    this.$('hist-current').textContent = index + 1;
+    this.$('hist-image').style.backgroundImage = `url('${q.img}')`;
+    this.$('hist-title').textContent = q.event;
+    this.$('hist-era').textContent = q.era;
+    this.$('hist-place').textContent = q.place;
+    this.$('hist-type').textContent = q.type;
+    this.$('hist-mark-top').textContent = q.markTop || '';
+    this.$('hist-mark-bot').textContent = q.markBot || '';
+    this.$('hist-year-vert').textContent = q.markTop || '';
+    this.$('hist-desc').textContent = q.exp;
+
+    // Trait de séparation des dates seulement si l'événement a une fin
+    card.querySelector('.hist-mark-line').style.display = q.markBot ? '' : 'none';
+
+    // Reset état
+    card.classList.remove('revealed');
+    card.scrollTop = 0;
+    const panel = card.querySelector('.hist-panel');
+    if (panel) panel.scrollTop = 0;
+    this.$('hist-actions').hidden = true;
+    this._histRevealed = false;
+
+    if (!first) {
+      const arena = this.$('hist-arena');
+      arena.style.opacity = '0';
+      setTimeout(() => { arena.style.opacity = '1'; }, 240);
+    }
+  }
+
+  revealHistoire() {
+    if (this._histRevealed) return;
+    this._histRevealed = true;
+    this.$('hist-card').classList.add('revealed');
+    this.$('hist-actions').hidden = false;
+  }
+
+  histoireAnswer(correct) {
+    if (!this._histRevealed) return;
+    if (this._histAnimating) return;
+    this._histAnimating = true;
+
+    const q = this.deck[this.currentIndex];
+    if (correct) this.sessionCorrect++;
+    this.$('hist-score').textContent = `${this.sessionCorrect} ✓`;
+
+    this._incrementDaily();
+    this._saveLocalScore(correct);
+    auth.saveProgress(q.id, q.cat, correct);
+
+    this.currentIndex++;
+    if (this.currentIndex >= this.deck.length) {
+      this.showResults();
+      this._histAnimating = false;
+    } else {
+      this.loadHistoireCard(this.currentIndex);
+      setTimeout(() => { this._histAnimating = false; }, 260);
+    }
+  }
+
+  bindHistoireUI() {
+    this.$('btn-back-hist').addEventListener('click', () => this.enterHome());
+    this.$('hist-card').addEventListener('click', () => this.revealHistoire());
+    this.$('btn-hist-wrong').addEventListener('click', () => this.histoireAnswer(false));
+    this.$('btn-hist-correct').addEventListener('click', () => this.histoireAnswer(true));
   }
 
   bindVinylUI() {

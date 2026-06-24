@@ -20,15 +20,86 @@ const QUESTIONS = [
   { id: 7,  cat: 'sport', q: "Quel nageur américain détient le record du plus grand nombre de médailles olympiques ?", a: "Michael Phelps — 28 médailles (23 en or)", exp: "Phelps a participé à 5 JO (2000-2016) et n'a jamais fini hors du podium en finale individuelle.", diff: 2 },
   { id: 8,  cat: 'sport', q: "Dans quel sport pratique-t-on le 'smash', le 'lob' et le 'passing-shot' ?", a: "Le tennis", exp: "Ces termes techniques du tennis décrivent respectivement une frappe en puissance vers le bas, un lift lobé par-dessus l'adversaire au filet, et un tir passant.", diff: 1 },
 
-  // ── HISTOIRE ───────────────────────────────────────────────────────────────
-  { id: 9,  cat: 'histoire', q: "En quelle année a débuté la Révolution française ?", a: "1789", exp: "La prise de la Bastille le 14 juillet 1789 est le symbole du début de la Révolution. La Déclaration des droits de l'Homme suit le 26 août.", diff: 1 },
-  { id: 10, cat: 'histoire', q: "Qui a peint le plafond de la chapelle Sixtine ?", a: "Michel-Ange (1508–1512)", exp: "Michel-Ange a peint 500 m² de fresques sur commande du pape Jules II, représentant des scènes de la Genèse dont la célèbre Création d'Adam.", diff: 1 },
-  { id: 11, cat: 'histoire', q: "Quelle civilisation a construit les pyramides de Gizeh ?", a: "Les Égyptiens anciens (vers 2560–2510 av. J.-C.)", exp: "Les trois pyramides furent bâties pour les pharaons Khéops, Khéphren et Mykérinos. La grande pyramide fut la plus haute construction humaine pendant 3 800 ans.", diff: 1 },
-  { id: 12, cat: 'histoire', q: "En quelle année le mur de Berlin est-il tombé ?", a: "1989 (9 novembre)", exp: "Après 28 ans de séparation, la frontière est ouverte dans la nuit du 9 au 10 novembre 1989. La réunification allemande suit le 3 octobre 1990.", diff: 1 },
-  { id: 13, cat: 'histoire', q: "Quel traité a officiellement mis fin à la Première Guerre mondiale ?", a: "Le Traité de Versailles (28 juin 1919)", exp: "Signé dans la galerie des Glaces du château de Versailles, il impose de lourdes réparations à l'Allemagne, semant les graines du conflit suivant.", diff: 2 },
-  { id: 14, cat: 'histoire', q: "Qui était la première femme à obtenir un prix Nobel ?", a: "Marie Curie — Nobel de Physique en 1903", exp: "Marie Curie obtiendra un second Nobel en 1911 (Chimie), devenant la première personne à en remporter deux dans des disciplines différentes.", diff: 2 },
-  { id: 15, cat: 'histoire', q: "Dans quelle ville l'archiduc François-Ferdinand a-t-il été assassiné en 1914 ?", a: "Sarajevo (28 juin 1914)", exp: "L'assassinat par Gavrilo Princip déclenche la chaîne d'ultimatums menant à la Première Guerre mondiale, six semaines plus tard.", diff: 3 },
-  { id: 16, cat: 'histoire', q: "Quel événement marque la fin de l'Empire romain d'Occident ?", a: "La déposition de Romulus Augustule en 476 apr. J.-C.", exp: "Odoacre, chef des Hérules, dépose le dernier empereur en 476. La date est conventionnellement retenue comme la fin de l'Antiquité.", diff: 3 },
+  // ── HISTOIRE (événements marquants — format musée avec photo) ────────────────
+  { id: 9, cat: 'histoire', mode: 'event', diff: 1,
+    event: "Les Pyramides de Gizeh", era: "ANTIQUITÉ", place: "Gizeh, Égypte", type: "Architecture",
+    markTop: "−2560", markBot: "−2510", img: "assets/histoire/pyramides-gizeh.jpg",
+    exp: "Érigées vers 2560 av. J.-C. pour les pharaons Khéops, Khéphren et Mykérinos, les pyramides de Gizeh sont les seules des Sept Merveilles du monde antique encore debout. Haute de 146 m, la grande pyramide est restée la plus haute construction humaine pendant près de 4 000 ans." },
+
+  { id: 10, cat: 'histoire', mode: 'event', diff: 1,
+    event: "Le Colisée de Rome", era: "ANTIQUITÉ", place: "Rome, Italie", type: "Empire romain",
+    markTop: "72", markBot: "80", img: "assets/histoire/colisee-rome.jpg",
+    exp: "Inauguré en l'an 80 sous l'empereur Titus, le Colisée pouvait accueillir jusqu'à 50 000 spectateurs venus assister aux combats de gladiateurs et aux jeux. Symbole de la puissance de Rome, il demeure le plus grand amphithéâtre jamais construit." },
+
+  { id: 11, cat: 'histoire', mode: 'event', diff: 2,
+    event: "La Grande Muraille de Chine", era: "ANTIQUITÉ", place: "Chine du Nord", type: "Fortification",
+    markTop: "−220", markBot: "1644", img: "assets/histoire/grande-muraille.jpg",
+    exp: "Commencée vers 220 av. J.-C. sous l'empereur Qin Shi Huang puis prolongée pendant près de deux millénaires, la Grande Muraille s'étend sur plus de 21 000 km. Elle protégeait l'empire chinois des invasions nomades venues du nord." },
+
+  { id: 12, cat: 'histoire', mode: 'event', diff: 2,
+    event: "La Peste noire", era: "MOYEN ÂGE", place: "Europe", type: "Pandémie",
+    markTop: "1347", markBot: "1352", img: "assets/histoire/peste-noire.jpg",
+    exp: "Entre 1347 et 1352, la peste noire ravage l'Europe et emporte entre 30 et 50 % de la population, soit environ 25 millions de morts. Transmise par les puces des rats à bord des navires marchands, elle bouleversa durablement la société médiévale." },
+
+  { id: 13, cat: 'histoire', mode: 'event', diff: 2,
+    event: "L'invention de l'imprimerie", era: "RENAISSANCE", place: "Mayence, Saint-Empire", type: "Invention",
+    markTop: "1450", markBot: "1455", img: "assets/histoire/imprimerie.jpg",
+    exp: "Vers 1450, Johannes Gutenberg met au point l'imprimerie à caractères mobiles en métal. Sa Bible, achevée vers 1455, est le premier grand livre imprimé d'Occident. L'invention démocratise le savoir et accélère la Réforme et la Renaissance." },
+
+  { id: 14, cat: 'histoire', mode: 'event', diff: 1,
+    event: "Colomb atteint l'Amérique", era: "RENAISSANCE", place: "Bahamas", type: "Exploration",
+    markTop: "1492", markBot: "", img: "assets/histoire/colomb-amerique.jpg",
+    exp: "Le 12 octobre 1492, Christophe Colomb, financé par les rois d'Espagne, atteint une île des Caraïbes en cherchant une route vers les Indes par l'ouest. Sa découverte ouvre l'ère des grandes explorations et la colonisation européenne du Nouveau Monde." },
+
+  { id: 15, cat: 'histoire', mode: 'event', diff: 1,
+    event: "La Révolution française", era: "RÉVOLUTION", place: "France", type: "Révolution",
+    markTop: "1789", markBot: "1799", img: "assets/histoire/bastille.jpg",
+    exp: "Le 14 juillet 1789, le peuple de Paris prend la Bastille, prison royale symbole de l'absolutisme. C'est le début de la Révolution française, qui abolit la monarchie, proclame la Déclaration des droits de l'homme et bouleverse l'ordre politique de toute l'Europe." },
+
+  { id: 16, cat: 'histoire', mode: 'event', diff: 2,
+    event: "L'Indépendance américaine", era: "XVIIIᵉ S.", place: "Philadelphie, É.-U.", type: "Indépendance",
+    markTop: "1776", markBot: "1783", img: "assets/histoire/independance-usa.jpg",
+    exp: "Le 4 juillet 1776, treize colonies britanniques d'Amérique proclament leur indépendance dans une déclaration rédigée par Thomas Jefferson. Reconnue en 1783, elle donne naissance aux États-Unis et inspire les révolutions démocratiques du monde entier." },
+
+  { id: 104, cat: 'histoire', mode: 'event', diff: 2,
+    event: "Le Sacre de Napoléon", era: "EMPIRE", place: "Paris, France", type: "Empire",
+    markTop: "1804", markBot: "1815", img: "assets/histoire/sacre-napoleon.jpg",
+    exp: "Le 2 décembre 1804, Napoléon Bonaparte se couronne lui-même empereur des Français dans la cathédrale Notre-Dame, sous le regard du pape Pie VII. Son règne réorganise l'Europe par les guerres et le Code civil, avant de s'achever à Waterloo en 1815." },
+
+  { id: 105, cat: 'histoire', mode: 'event', diff: 1,
+    event: "La Première Guerre mondiale", era: "XXᵉ SIÈCLE", place: "Europe", type: "Guerre",
+    markTop: "1914", markBot: "1918", img: "assets/histoire/premiere-gm.jpg",
+    exp: "De 1914 à 1918, la Grande Guerre oppose les puissances européennes dans des combats d'une violence inédite, marqués par la guerre de tranchées. Elle fait près de 10 millions de morts et redessine la carte du monde par le traité de Versailles en 1919." },
+
+  { id: 106, cat: 'histoire', mode: 'event', diff: 2,
+    event: "La Révolution russe", era: "XXᵉ SIÈCLE", place: "Petrograd, Russie", type: "Révolution",
+    markTop: "1917", markBot: "", img: "assets/histoire/revolution-russe.jpg",
+    exp: "En octobre 1917, les bolcheviks de Lénine s'emparent du pouvoir à Petrograd lors de la prise du Palais d'Hiver. La Révolution russe renverse le tsarisme et fonde le premier État communiste, l'URSS, qui marquera tout le XXᵉ siècle." },
+
+  { id: 107, cat: 'histoire', mode: 'event', diff: 1,
+    event: "La Seconde Guerre mondiale", era: "XXᵉ SIÈCLE", place: "Monde", type: "Guerre",
+    markTop: "1939", markBot: "1945", img: "assets/histoire/seconde-gm.jpg",
+    exp: "De 1939 à 1945, le conflit le plus meurtrier de l'histoire oppose les Alliés aux forces de l'Axe. Avec environ 60 millions de morts, la Shoah et l'arme atomique, il bouleverse l'ordre mondial. Le débarquement de Normandie, en juin 1944, marque le tournant en Europe." },
+
+  { id: 108, cat: 'histoire', mode: 'event', diff: 2,
+    event: "La bombe d'Hiroshima", era: "XXᵉ SIÈCLE", place: "Hiroshima, Japon", type: "Arme nucléaire",
+    markTop: "1945", markBot: "", img: "assets/histoire/hiroshima.jpg",
+    exp: "Le 6 août 1945, les États-Unis larguent la première bombe atomique de l'histoire sur Hiroshima, suivie de Nagasaki trois jours plus tard. Faisant plus de 200 000 morts, ces bombardements précipitent la capitulation du Japon et ouvrent l'ère nucléaire." },
+
+  { id: 109, cat: 'histoire', mode: 'event', diff: 1,
+    event: "Le premier pas sur la Lune", era: "ESPACE", place: "Mer de la Tranquillité", type: "Exploit spatial",
+    markTop: "1969", markBot: "", img: "assets/histoire/lune-apollo11.jpg",
+    exp: "Le 21 juillet 1969, l'Américain Neil Armstrong devient le premier homme à marcher sur la Lune lors de la mission Apollo 11 : « un petit pas pour l'homme, un bond de géant pour l'humanité ». Plus de 500 millions de personnes suivent l'événement en direct à la télévision." },
+
+  { id: 110, cat: 'histoire', mode: 'event', diff: 1,
+    event: "La chute du mur de Berlin", era: "GUERRE FROIDE", place: "Berlin, Allemagne", type: "Géopolitique",
+    markTop: "1961", markBot: "1989", img: "assets/histoire/mur-berlin.jpg",
+    exp: "Dans la nuit du 9 novembre 1989, après 28 ans de séparation, les Berlinois abattent le mur qui divisait leur ville et symbolisait le rideau de fer. Sa chute annonce la fin de la guerre froide et la réunification de l'Allemagne, scellée en 1990." },
+
+  { id: 111, cat: 'histoire', mode: 'event', diff: 1,
+    event: "Les attentats du 11 septembre", era: "XXIᵉ SIÈCLE", place: "New York, É.-U.", type: "Terrorisme",
+    markTop: "2001", markBot: "", img: "assets/histoire/11-septembre.jpg",
+    exp: "Le 11 septembre 2001, des terroristes d'Al-Qaïda détournent quatre avions et frappent les tours jumelles du World Trade Center et le Pentagone, faisant près de 3 000 morts. Ces attentats bouleversent la géopolitique mondiale et déclenchent la « guerre contre le terrorisme »." },
 
   // ── GÉOGRAPHIE ─────────────────────────────────────────────────────────────
   { id: 17, cat: 'geo', q: "Quel est le plus long fleuve du monde ?", a: "Le Nil (6 650 km)", exp: "Selon la majorité des sources, le Nil est le plus long. Certaines études récentes mettent l'Amazone en tête selon le point de source retenu.", diff: 2 },
